@@ -1,0 +1,551 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.input.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dn3.Controller">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu text="_Datoteka">
+            <items>
+                  <MenuItem onAction="#odpri" text="_Odpri">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="O" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+                  <MenuItem onAction="#shrani" text="_Shrani">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+              <MenuItem onAction="#zapri" text="_Izhod">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="Q" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
+            </items>
+          </Menu>
+          <Menu text="_Popravi">
+            <items>
+                  <MenuItem onAction="#brisi" text="_Vstavi privzete vrednosti" />
+            </items>
+          </Menu>
+          <Menu text="_Pomoč">
+            <items>
+              <MenuItem onAction="#oAvtorju" text="_O Avtorju" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <bottom>
+      <HBox BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="status" alignment="BOTTOM_LEFT" text="Status:">
+               <opaqueInsets>
+                  <Insets bottom="10.0" left="15.0" />
+               </opaqueInsets>
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <HBox.margin>
+                  <Insets bottom="5.0" left="10.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+      </HBox>
+   </bottom>
+   <center>
+      <GridPane BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="562.0" minHeight="10.0" prefHeight="490.0" vgrow="ALWAYS" />
+          <RowConstraints maxHeight="350.0" minHeight="10.0" prefHeight="222.0" vgrow="ALWAYS" />
+        </rowConstraints>
+         <children>
+            <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="120.0" minWidth="10.0" prefWidth="120.0" />
+                <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="250.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints maxHeight="115.0" minHeight="0.0" prefHeight="28.0" vgrow="NEVER" />
+                <RowConstraints maxHeight="222.0" minHeight="10.0" prefHeight="122.0" />
+                <RowConstraints maxHeight="257.0" minHeight="10.0" prefHeight="184.0" />
+                <RowConstraints maxHeight="124.0" minHeight="10.0" prefHeight="88.0" />
+              </rowConstraints>
+               <children>
+                  <VBox maxWidth="1.7976931348623157E308" spacing="13.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <children>
+                        <TextField fx:id="znamka" onKeyTyped="#onSpremembaHandler" />
+                        <TextField fx:id="oznaka" layoutX="10.0" layoutY="10.0" onKeyTyped="#onSpremembaHandler" />
+                     </children>
+                     <padding>
+                        <Insets top="1.0" />
+                     </padding>
+                  </VBox>
+                  <VBox spacing="13.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
+                     <children>
+                        <Label text="Znamka:">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                           <padding>
+                              <Insets top="8.0" />
+                           </padding>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="10.0" text="Oznaka:">
+                           <padding>
+                              <Insets top="8.0" />
+                           </padding>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="13.0" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                     <children>
+                        <Label text="Gorivo:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="8.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label text="Moč:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="8.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="44.0" text="Prostornina:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="8.0" />
+                           </VBox.margin>
+                        </Label>
+                     </children></VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="13.0" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                     <children>
+                        <HBox spacing="10.0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS">
+                           <children>
+                              <RadioButton fx:id="gorivoBencin" mnemonicParsing="false" onMouseClicked="#onSpremembaHandler" text="Bencin" textFill="#0f5fff">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="gorivo" />
+                                 </toggleGroup>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor></RadioButton>
+                              <RadioButton fx:id="gorivoDiesel" layoutX="10.0" layoutY="17.0" mnemonicParsing="false" onMouseClicked="#onSpremembaHandler" text="Diesel" textFill="#0f5fff" toggleGroup="$gorivo">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor></RadioButton>
+                              <RadioButton fx:id="gorivoElektrika" layoutX="89.0" layoutY="17.0" mnemonicParsing="false" onMouseClicked="#onSpremembaHandler" text="Elektrika" textFill="#0f5fff" toggleGroup="$gorivo">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor></RadioButton>
+                           </children>
+                           <padding>
+                              <Insets top="7.0" />
+                           </padding>
+                        </HBox>
+                        <TextField fx:id="moc" onKeyTyped="#onSpremembaHandler" promptText="kW">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </TextField>
+                        <TextField fx:id="prostornina" layoutX="10.0" layoutY="43.0" onKeyTyped="#onSpremembaHandler" promptText="ccm">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </TextField>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="13.0" GridPane.rowIndex="3">
+                     <children>
+                        <Label text="Št. sedežev:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <padding>
+                              <Insets top="8.0" />
+                           </padding>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="10.0" text="Vrsta vozila:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <padding>
+                              <Insets top="8.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="13.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <children>
+                        <Spinner fx:id="stSedezev" onInputMethodTextChanged="#onSpremembaHandler" prefHeight="26.0" prefWidth="57.0" />
+                        <ChoiceBox fx:id="vrstaVozila" onInputMethodTextChanged="#onSpremembaHandler" prefWidth="150.0" />
+                     </children>
+                     <padding>
+                        <Insets top="2.0" />
+                     </padding></VBox>
+                  <Label text="Podatki o vozilu" GridPane.columnSpan="2">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+               <GridPane.margin>
+                  <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+               </GridPane.margin>
+            </GridPane>
+            <GridPane layoutX="40.0" layoutY="40.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="151.0" minWidth="10.0" prefWidth="150.0" />
+                  <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="250.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" />
+                  <RowConstraints minHeight="400.0" prefHeight="10.0" />
+               </rowConstraints>
+               <children>
+                  <VBox maxWidth="1.7976931348623157E308" spacing="13.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <children>
+                        <TextField fx:id="ime" onKeyTyped="#onSpremembaHandler" />
+                        <TextField fx:id="priimek" layoutX="10.0" layoutY="10.0" onKeyTyped="#onSpremembaHandler" />
+                        <TextField fx:id="naslov" layoutX="10.0" layoutY="45.0" onKeyTyped="#onSpremembaHandler" />
+                        <TextField fx:id="posta" layoutX="10.0" layoutY="63.0" maxWidth="60.0" onKeyTyped="#onSpremembaHandler" prefHeight="26.0" prefWidth="84.0" />
+                        <TextField fx:id="kraj" layoutX="10.0" layoutY="63.0" onKeyTyped="#onSpremembaHandler" />
+                        <Region prefHeight="200.0" prefWidth="200.0" />
+                        <TextField layoutX="10.0" layoutY="167.0" visible="false" />
+                        <Spinner fx:id="danRojstva" editable="true" onInputMethodTextChanged="#onSpremembaHandler" prefHeight="26.0" prefWidth="65.0" />
+                        <ChoiceBox fx:id="mesecRojstva" onInputMethodTextChanged="#onSpremembaHandler" prefWidth="150.0" />
+                        <Spinner fx:id="letoRojstva" editable="true" layoutX="10.0" layoutY="245.0" onInputMethodTextChanged="#onSpremembaHandler" prefHeight="26.0" prefWidth="107.0" />
+                        <Region prefHeight="200.0" prefWidth="200.0" />
+                        <CheckBox fx:id="mladiVoznik" mnemonicParsing="false" onKeyPressed="#onSpremembaHandler" text="Mladi voznik" textFill="#0f5fff">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </CheckBox>
+                     </children>
+                     <padding>
+                        <Insets top="1.0" />
+                     </padding>
+                  </VBox>
+                  <VBox spacing="13.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
+                     <children>
+                        <Label text="Ime:">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                           <padding>
+                              <Insets top="8.0" />
+                           </padding>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="10.0" text="Priimek:">
+                           <padding>
+                              <Insets top="8.0" />
+                           </padding>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label text="Naslov:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                           <padding>
+                              <Insets top="8.0" />
+                           </padding>
+                        </Label>
+                        <Label text="Poštna št.:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                           <padding>
+                              <Insets top="8.0" />
+                           </padding>
+                        </Label>
+                        <Label text="Kraj:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                           <padding>
+                              <Insets top="8.0" />
+                           </padding>
+                          </Label>
+                        <Region prefHeight="200.0" prefWidth="200.0" />
+                        <Label text="Datum Rojstva">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label text="Dan:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <padding>
+                              <Insets top="8.0" />
+                           </padding>
+                        </Label>
+                        <Label text="Mesec:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <padding>
+                              <Insets top="8.0" />
+                           </padding>
+                        </Label>
+                        <Label text="Leto:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <padding>
+                              <Insets top="8.0" />
+                           </padding>
+                        </Label>
+                        <Region prefHeight="200.0" prefWidth="200.0" />
+                        <Label layoutX="10.0" layoutY="322.0" text="Izkušnje:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <Label text="Podatki o zavarovancu" GridPane.columnSpan="2">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+               </padding>
+            </GridPane>
+            <GridPane layoutX="40.0" layoutY="40.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.rowIndex="1">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="198.0" minWidth="10.0" prefWidth="188.0" />
+                  <ColumnConstraints hgrow="ALWAYS" maxWidth="157.0" minWidth="10.0" prefWidth="150.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="116.0" minHeight="10.0" prefHeight="34.0" vgrow="NEVER" />
+                  <RowConstraints maxHeight="116.0" minHeight="10.0" prefHeight="77.0" vgrow="ALWAYS" />
+               </rowConstraints>
+               <children>
+                  <VBox spacing="13.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <padding>
+                        <Insets top="1.0" />
+                     </padding>
+                     <children>
+                        <HBox spacing="10.0">
+                           <children>
+                              <RadioButton fx:id="ao" mnemonicParsing="false" onMouseClicked="#onSpremembaHandler" text="AO" textFill="#0f5fff">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor></RadioButton>
+                              <RadioButton fx:id="aoPlus" mnemonicParsing="false" onMouseClicked="#onSpremembaHandler" text="AO+" textFill="#0f5fff">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor></RadioButton>
+                           </children>
+                           <padding>
+                              <Insets top="8.0" />
+                           </padding>
+                        </HBox>
+                        <VBox spacing="10.0">
+                           <children>
+                              <RadioButton id="kaskoPolno" fx:id="kaskoPolno" mnemonicParsing="false" onMouseClicked="#onSpremembaHandler" text="Polno" textFill="#0f5fff">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="kasko" />
+                                 </toggleGroup></RadioButton>
+                              <RadioButton id="kaskoOdbitna" fx:id="kaskoOdbitna" mnemonicParsing="false" onMouseClicked="#onSpremembaHandler" text="Odbitna franšiza" textFill="#0f5fff" toggleGroup="$kasko">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor></RadioButton>
+                              <RadioButton id="kaskoBrez" fx:id="kaskoBrez" layoutX="10.0" layoutY="38.0" mnemonicParsing="false" onMouseClicked="#onSpremembaHandler" text="Brez" textFill="#0f5fff" toggleGroup="$kasko">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor></RadioButton>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </VBox>
+                     </children>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </VBox>
+                  <VBox maxHeight="1.7976931348623157E308" prefWidth="211.0" spacing="13.0" GridPane.rowIndex="1" GridPane.vgrow="NEVER">
+                     <children>
+                        <Label text="Zavarovanje:">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                           <padding>
+                              <Insets top="22.0" />
+                           </padding>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="10.0" text="Kasko:">
+                           <padding>
+                              <Insets top="10.0" />
+                           </padding>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <MenuButton fx:id="menuZavarovanje" mnemonicParsing="false" text="Dodatno zavarovanje">
+                           <items>
+                              <CheckMenuItem fx:id="zavarovanjeStekel" mnemonicParsing="false" text="Zavarovanje stekel" />
+                              <CheckMenuItem fx:id="zavarovanjeParkirisce" mnemonicParsing="false" text="Zavarovanje na parkirišču" />
+                              <CheckMenuItem fx:id="zavarovanjeTretjeOsebe" mnemonicParsing="false" text="Zavarovanje tretje osebe" />
+                              <CheckMenuItem fx:id="zavarovanjeGum" mnemonicParsing="false" text="Zavarovanje gum" />
+                              <CheckMenuItem fx:id="zavarovanjeProtiKraji" mnemonicParsing="false" text="Zavarovanje proti kraji" />
+                              <CheckMenuItem fx:id="zavarovanjeProtiToci" mnemonicParsing="false" text="Zavarovanje proti toči" />
+                           </items>
+                           <VBox.margin>
+                              <Insets top="60.0" />
+                           </VBox.margin>
+                        </MenuButton>
+                     </children>
+                     <padding>
+                        <Insets top="25.0" />
+                     </padding>
+                  </VBox>
+                  <Label text="Podatki o zavarovanju" GridPane.columnSpan="2">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="13.0" />
+                     </padding></Label>
+                  <Label layoutX="10.0" layoutY="9.0">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="13.0" />
+                     </padding>
+                  </Label>
+               </children>
+               <GridPane.margin>
+                  <Insets bottom="30.0" left="30.0" right="30.0" top="19.0" />
+               </GridPane.margin>
+            </GridPane>
+            <GridPane layoutX="40.0" layoutY="519.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="199.0" minWidth="10.0" prefWidth="183.0" />
+                  <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="157.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="116.0" minHeight="10.0" prefHeight="22.0" vgrow="NEVER" />
+                  <RowConstraints maxHeight="135.0" minHeight="10.0" prefHeight="135.0" vgrow="ALWAYS" />
+                  <RowConstraints maxHeight="124.0" minHeight="10.0" prefHeight="60.0" vgrow="ALWAYS" />
+               </rowConstraints>
+               <children>
+                  <VBox maxWidth="1.7976931348623157E308" spacing="13.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <children>
+                        <TextField fx:id="reg" onKeyTyped="#onSpremembaHandler" promptText="CE L1-83T" />
+                        <TextField fx:id="regPrvaKraj" layoutX="10.0" layoutY="10.0" onKeyTyped="#onSpremembaHandler" />
+                        <DatePicker fx:id="regPrvaDatum" onAction="#onSpremembaHandler" onKeyPressed="#onSpremembaHandler" />
+                     </children>
+                     <padding>
+                        <Insets top="1.0" />
+                     </padding>
+                  </VBox>
+                  <VBox spacing="13.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
+                     <children>
+                        <Label text="Registracijska označba:">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                           <padding>
+                              <Insets top="8.0" />
+                           </padding>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="10.0" text="Kraj prve registracije:">
+                           <padding>
+                              <Insets top="8.0" />
+                           </padding>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="49.0" text="Datum prve registracije:">
+                           <padding>
+                              <Insets top="8.0" />
+                           </padding>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <Label text="Podatki o registraciji" GridPane.columnSpan="2">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="15.0" />
+                     </padding></Label>
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#shrani" prefHeight="39.0" prefWidth="101.0" text="Shrani" textFill="#0f5fff" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+               </padding>
+            </GridPane>
+         </children>
+      </GridPane>
+   </center>
+</BorderPane>

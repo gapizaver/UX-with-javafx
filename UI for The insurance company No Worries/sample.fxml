@@ -1,0 +1,912 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.input.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="520.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu text="_Datoteka">
+            <items>
+              <MenuItem onAction="#izhod" text="_Izhod">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="Q" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+            </items>
+          </Menu>
+          <Menu text="_Uredi">
+            <items>
+              <MenuItem onAction="#ponastavi" text="_Ponastavi začetne vrednosti" />
+                  <MenuItem onAction="#ustvariPovzetek" text="Ustvari Po_vzetek" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="_Pomoč">
+            <items>
+              <MenuItem onAction="#oAvtorju" text="_O avtorju" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <bottom>
+      <Pane BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="status" text="Status:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <padding>
+                  <Insets bottom="5.0" left="10.0" />
+               </padding>
+            </Label>
+         </children>
+      </Pane>
+   </bottom>
+   <center>
+      <TabPane fx:id="tabPane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab fx:id="zavihekOkoliscine" text="Okoliščine">
+               <content>
+                  <GridPane>
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" percentWidth="50.0" prefWidth="109.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="333.0" minWidth="10.0" percentWidth="50.0" prefWidth="331.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
+                        <RowConstraints fx:id="row1" minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label fx:id="cena" text="CENA: Za prikaz cene izpolnite zavihka &quot;Okoliščine&quot; in &quot;Vozilo&quot;" GridPane.columnSpan="2" GridPane.rowIndex="2">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <VBox prefHeight="429.0" prefWidth="238.0" spacing="8.0">
+                           <children>
+                              <Label text="Izposoja vozila">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets top="6.0" />
+                                 </padding>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="10.0" text="Datum izposoje:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets top="6.0" />
+                                 </padding>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="10.0" text="Čas izposoje:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets top="6.0" />
+                                 </padding>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="42.0" text="Kraj izposoje:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets top="8.0" />
+                                 </padding>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="200.0" prefWidth="347.0" spacing="8.0" GridPane.columnIndex="1">
+                           <children>
+                              <DatePicker fx:id="datumIzposoje" onAction="#preveriCeno" />
+                              <HBox>
+                                 <children>
+                                    <Spinner fx:id="uraIzposoje" onMouseClicked="#preveriCenoSpinner" prefHeight="26.0" prefWidth="60.0" />
+                                    <Label text=" : ">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                       <padding>
+                                          <Insets top="1.0" />
+                                       </padding>
+                                    </Label>
+                                    <Spinner fx:id="minIzposoje" layoutX="10.0" layoutY="10.0" prefHeight="26.0" prefWidth="60.0" />
+                                 </children>
+                              </HBox>
+                              <ChoiceBox fx:id="krajIzposoje" prefWidth="150.0">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor></ChoiceBox>
+                           </children>
+                           <padding>
+                              <Insets top="32.0" />
+                           </padding>
+                        </VBox>
+                        <VBox fx:id="test" prefHeight="429.0" prefWidth="238.0" spacing="8.0" GridPane.rowIndex="1">
+                           <children>
+                              <Label text="Vrnitev vozila">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets top="6.0" />
+                                 </padding>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="10.0" text="Datum vrnitve:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets top="6.0" />
+                                 </padding>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="42.0" text="Čas vrnitve:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets top="6.0" />
+                                 </padding>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="74.0" text="Kraj vrnitve:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets top="8.0" />
+                                 </padding>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <VBox layoutX="256.0" layoutY="40.0" prefHeight="200.0" prefWidth="347.0" spacing="8.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <children>
+                              <DatePicker fx:id="datumVrnitve" layoutX="10.0" layoutY="10.0" onAction="#preveriCeno" />
+                              <HBox>
+                                 <children>
+                                    <Spinner fx:id="uraVrnitve" onMouseClicked="#preveriCenoSpinner" prefHeight="26.0" prefWidth="60.0" />
+                                    <Label text=" : ">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                       <padding>
+                                          <Insets top="1.0" />
+                                       </padding>
+                                    </Label>
+                                    <Spinner fx:id="minVrnitve" layoutX="10.0" layoutY="10.0" prefHeight="26.0" prefWidth="60.0" />
+                                 </children>
+                              </HBox>
+                              <ChoiceBox fx:id="krajVrnitve" layoutX="10.0" layoutY="74.0" prefWidth="150.0">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor></ChoiceBox>
+                           </children>
+                           <padding>
+                              <Insets top="32.0" />
+                           </padding>
+                        </VBox>
+                        <Button maxWidth="1.7976931348623157E308" onAction="#odpriZavihekVozilo" text="Na_prej" textFill="#2b32eb" GridPane.columnSpan="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Button>
+                     </children>
+                     <padding>
+                        <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+                     </padding>
+                  </GridPane>
+               </content></Tab>
+            <Tab fx:id="zavihekVozilo" text="Vozilo">
+                <content>
+                    <GridPane>
+                        <columnConstraints>
+                            <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" percentWidth="50.0" prefWidth="109.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="333.0" minWidth="10.0" percentWidth="83.0" prefWidth="331.0" />
+                        </columnConstraints>
+                        <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        </rowConstraints>
+                        <children>
+                            <Label fx:id="cena2" text="CENA: Za prikaz cene izpolnite zavihka &quot;Okoliščine&quot; in &quot;Vozilo&quot;" GridPane.columnSpan="2" GridPane.rowIndex="1">
+                                <font>
+                                    <Font size="14.0" />
+                                </font>
+                            </Label>
+                            <VBox prefHeight="429.0" prefWidth="238.0" spacing="8.0">
+                                <children>
+                                    <Label layoutX="10.0" layoutY="10.0" text="Velikost vozila:">
+                                        <font>
+                                            <Font size="14.0" />
+                                        </font>
+                                        <padding>
+                                            <Insets top="6.0" />
+                                        </padding>
+                                    </Label>
+                                    <Label layoutX="10.0" layoutY="10.0" text="Avtomobil:">
+                                        <font>
+                                            <Font size="14.0" />
+                                        </font>
+                                        <padding>
+                                            <Insets top="8.0" />
+                                        </padding>
+                                    </Label>
+                                    <Label layoutX="10.0" layoutY="42.0" text="Menjalnik:">
+                                        <font>
+                                            <Font size="14.0" />
+                                        </font>
+                                        <padding>
+                                            <Insets top="8.0" />
+                                        </padding>
+                                    </Label>
+                              <Label layoutX="10.0" layoutY="76.0" text="Motor:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets top="8.0" />
+                                 </padding>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="110.0" text="Zavarovanje:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets top="8.0" />
+                                 </padding>
+                              </Label>
+                                </children>
+                            </VBox>
+                            <VBox prefHeight="200.0" prefWidth="347.0" spacing="8.0" GridPane.columnIndex="1">
+                                <children>
+                              <HBox>
+                                 <children>
+                                    <RadioButton fx:id="velikostMajhen" mnemonicParsing="false" onAction="#izbranaMajhnaVelikost" text="Majhen" textFill="#2b32eb">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="velikostVozila" />
+                                       </toggleGroup>
+                                    </RadioButton>
+                                    <Region HBox.hgrow="ALWAYS" />
+                                    <RadioButton fx:id="velikostSrednji" mnemonicParsing="false" onAction="#izbranaSrednjaVelikost" text="Srednji" textFill="#2b32eb" toggleGroup="$velikostVozila">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </RadioButton>
+                                    <Region layoutX="86.0" layoutY="10.0" HBox.hgrow="ALWAYS" />
+                                    <RadioButton fx:id="velikostVelik" layoutX="86.0" layoutY="10.0" mnemonicParsing="false" onAction="#izbranaVelikaVelikost" text="Velik" textFill="#2b32eb" toggleGroup="$velikostVozila">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </RadioButton>
+                                    <Region layoutX="183.0" layoutY="10.0" HBox.hgrow="ALWAYS" />
+                                 </children>
+                              </HBox>
+                                    <ChoiceBox fx:id="avtomobil" onInputMethodTextChanged="#preveriCeno" prefHeight="26.0" prefWidth="188.0">
+                                 <VBox.margin>
+                                    <Insets top="3.0" />
+                                 </VBox.margin>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor></ChoiceBox>
+                              <HBox layoutX="10.0" layoutY="15.0">
+                                 <children>
+                                    <RadioButton fx:id="menjalnikRocni" mnemonicParsing="false" onAction="#preveriCeno" text="Ročni   " textFill="#2b32eb">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="menjalnik" />
+                                       </toggleGroup>
+                                    </RadioButton>
+                                    <Region HBox.hgrow="ALWAYS" />
+                                    <RadioButton fx:id="menjalnikSamodejni" mnemonicParsing="false" onAction="#preveriCeno" text="Samodejni" textFill="#2b32eb" toggleGroup="$menjalnik">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </RadioButton>
+                                    <Region maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets top="4.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox layoutX="10.0" layoutY="82.0">
+                                 <children>
+                                    <RadioButton fx:id="motorDizelski" mnemonicParsing="false" onAction="#preveriCeno" text="Dizelski" textFill="#2b32eb">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="motor" />
+                                       </toggleGroup>
+                                    </RadioButton>
+                                    <Region HBox.hgrow="ALWAYS" />
+                                    <RadioButton fx:id="motorBencinski" mnemonicParsing="false" onAction="#preveriCeno" text="Bencinski " textFill="#2b32eb" toggleGroup="$motor">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </RadioButton>
+                                    <Region maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets top="7.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <CheckBox fx:id="zavarovanje" mnemonicParsing="false" onAction="#preveriCeno" text="Dodatno avtomobilsko zavarovanje" textFill="#2b32eb">
+                                 <VBox.margin>
+                                    <Insets top="8.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </CheckBox>
+                                </children>
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                           <padding>
+                              <Insets top="5.0" />
+                           </padding>
+                            </VBox>
+                            <Button maxWidth="1.7976931348623157E308" onAction="#odpriZaveihekStranka" text="Na_prej" textFill="#2b32eb" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets left="5.0" />
+                           </GridPane.margin>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Button>
+                        <Button layoutX="223.0" layoutY="467.0" maxWidth="1.7976931348623157E308" onAction="#odpriZavihekOkoliscine" text="Na_zaj" textFill="#2b32eb" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets right="5.0" />
+                           </GridPane.margin>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        </children>
+                        <padding>
+                            <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+                        </padding>
+                    </GridPane>
+                </content></Tab>
+            <Tab fx:id="zavihekStranka" text="Stranka">
+                <content>
+                    <GridPane>
+                        <columnConstraints>
+                            <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" percentWidth="50.0" prefWidth="109.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="333.0" minWidth="10.0" percentWidth="70.0" prefWidth="331.0" />
+                        </columnConstraints>
+                        <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        </rowConstraints>
+                        <children>
+                            <VBox prefHeight="429.0" prefWidth="238.0" spacing="8.0">
+                                <children>
+                                    <Label layoutX="10.0" layoutY="10.0" text="Ime in priimek:">
+                                        <font>
+                                            <Font size="14.0" />
+                                        </font>
+                                        <padding>
+                                            <Insets top="7.0" />
+                                        </padding>
+                                    </Label>
+                                    <Label layoutX="10.0" layoutY="10.0" text="Naslov:">
+                                        <font>
+                                            <Font size="14.0" />
+                                        </font>
+                                        <padding>
+                                            <Insets top="8.0" />
+                                        </padding>
+                                    </Label>
+                                    <Label layoutX="10.0" layoutY="42.0" text="Pošta:">
+                                        <font>
+                                            <Font size="14.0" />
+                                        </font>
+                                        <padding>
+                                            <Insets top="8.0" />
+                                        </padding>
+                                    </Label>
+                                    <Label layoutX="10.0" layoutY="76.0" text="Kraj:">
+                                        <font>
+                                            <Font size="14.0" />
+                                        </font>
+                                        <padding>
+                                            <Insets top="8.0" />
+                                        </padding>
+                                    </Label>
+                              <Label layoutX="10.0" layoutY="110.0" text="E-mail:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets top="8.0" />
+                                 </padding>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="145.0" text="Starost:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets top="8.0" />
+                                 </padding>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="179.0" text="Čas imetja izpita:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets top="8.0" />
+                                 </padding>
+                              </Label>
+                                </children>
+                            </VBox>
+                            <VBox prefHeight="200.0" prefWidth="347.0" spacing="8.0" GridPane.columnIndex="1">
+                                <GridPane.margin>
+                                    <Insets />
+                                </GridPane.margin>
+                           <children>
+                              <TextField fx:id="ime" />
+                              <TextField fx:id="naslov" layoutX="10.0" layoutY="10.0" />
+                              <TextField fx:id="posta" layoutX="10.0" layoutY="44.0" maxWidth="-Infinity" prefHeight="26.0" prefWidth="83.0" VBox.vgrow="NEVER" />
+                              <TextField fx:id="kraj" layoutX="10.0" layoutY="78.0" />
+                              <TextField fx:id="mail" layoutX="10.0" layoutY="112.0" />
+                              <HBox>
+                                 <children>
+                                    <Spinner fx:id="starost" editable="true" prefHeight="26.0" prefWidth="74.0" HBox.hgrow="NEVER" />
+                                    <Label text=" let">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <padding>
+                                          <Insets top="8.0" />
+                                       </padding>
+                                    </Label>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets top="1.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox layoutX="10.0" layoutY="182.0">
+                                 <children>
+                                    <Spinner fx:id="casImetjaIzpita" editable="true" prefHeight="26.0" prefWidth="74.0" HBox.hgrow="NEVER" />
+                                    <Label text=" let">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <padding>
+                                          <Insets top="8.0" />
+                                       </padding>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <padding>
+                              <Insets top="1.0" />
+                           </padding>
+                            </VBox>
+                            <Button maxWidth="1.7976931348623157E308" onAction="#odpriZavihekPlacilo" text="Na_prej" textFill="#2b32eb" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
+                                <GridPane.margin>
+                                    <Insets left="5.0" />
+                                </GridPane.margin>
+                                <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                </cursor></Button>
+                            <Button layoutX="223.0" layoutY="467.0" maxWidth="1.7976931348623157E308" onAction="#odpriZavihekVozilo" text="Na_zaj" textFill="#2b32eb" GridPane.rowIndex="1">
+                                <GridPane.margin>
+                                    <Insets right="5.0" />
+                                </GridPane.margin>
+                                <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                </cursor>
+                            </Button>
+                        </children>
+                        <padding>
+                            <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+                        </padding>
+                    </GridPane>
+                </content></Tab>
+            <Tab fx:id="zavihekPlacilo" text="Plačilo">
+                <content>
+                    <GridPane>
+                        <columnConstraints>
+                            <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" percentWidth="50.0" prefWidth="109.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="333.0" minWidth="10.0" percentWidth="60.0" prefWidth="331.0" />
+                        </columnConstraints>
+                        <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        </rowConstraints>
+                        <children>
+                            <VBox prefHeight="429.0" prefWidth="238.0" spacing="8.0" GridPane.rowIndex="1">
+                                <children>
+                                    <Label layoutX="10.0" layoutY="10.0" text="Način plačila:">
+                                        <font>
+                                            <Font size="14.0" />
+                                        </font>
+                                        <padding>
+                                            <Insets top="7.0" />
+                                        </padding>
+                                    </Label>
+                                    <Label layoutX="10.0" layoutY="10.0" text="Številka kreditne kartice:">
+                                        <font>
+                                            <Font size="14.0" />
+                                        </font>
+                                        <padding>
+                                            <Insets top="8.0" />
+                                        </padding>
+                                 <VBox.margin>
+                                    <Insets top="4.0" />
+                                 </VBox.margin>
+                                    </Label>
+                                    <Label layoutX="10.0" layoutY="42.0" text="CCV:">
+                                        <font>
+                                            <Font size="14.0" />
+                                        </font>
+                                        <padding>
+                                            <Insets top="8.0" />
+                                        </padding>
+                                    </Label>
+                                </children>
+                           <padding>
+                              <Insets top="10.0" />
+                           </padding>
+                            </VBox>
+                            <VBox prefHeight="200.0" prefWidth="347.0" spacing="8.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                <GridPane.margin>
+                                    <Insets />
+                                </GridPane.margin>
+                                <children>
+                              <HBox>
+                                 <children>
+                                    <RadioButton fx:id="placiloGotovina" disable="true" mnemonicParsing="false" onAction="#spremembaNacinaPlacila" text="Gotovina" textFill="#2b32eb">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="nacinPlacila" />
+                                       </toggleGroup>
+                                    </RadioButton>
+                                    <Region HBox.hgrow="ALWAYS" />
+                                    <RadioButton fx:id="placiloKartica" disable="true" mnemonicParsing="false" onAction="#spremembaNacinaPlacila" text="Kartica" textFill="#2b32eb" toggleGroup="$nacinPlacila">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </RadioButton>
+                                    <Region maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                                 <padding>
+                                    <Insets top="5.0" />
+                                 </padding>
+                              </HBox>
+                                    <TextField fx:id="stevilkaKartice" disable="true" layoutX="10.0" layoutY="10.0" maxWidth="-Infinity" prefHeight="26.0" prefWidth="169.0" promptText="xxxx-xxxx-xxxx-xxxx">
+                                 <VBox.margin>
+                                    <Insets top="5.0" />
+                                 </VBox.margin></TextField>
+                                    <TextField fx:id="ccv" disable="true" layoutX="10.0" layoutY="44.0" maxWidth="-Infinity" prefHeight="26.0" prefWidth="51.0" promptText="xxx" VBox.vgrow="NEVER">
+                                 <VBox.margin>
+                                    <Insets top="1.0" />
+                                 </VBox.margin></TextField>
+                                </children>
+                                <padding>
+                                    <Insets top="11.0" />
+                                </padding>
+                            </VBox>
+                            <Button maxWidth="1.7976931348623157E308" onAction="#ustvariPovzetek" text="U_stvari povzetek" textFill="#2b32eb" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2">
+                                <GridPane.margin>
+                                    <Insets left="5.0" />
+                                </GridPane.margin>
+                                <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                </cursor></Button>
+                            <Button layoutX="223.0" layoutY="467.0" maxWidth="1.7976931348623157E308" onAction="#odpriZavihekStranka" text="Na_zaj" textFill="#2b32eb" GridPane.rowIndex="2">
+                                <GridPane.margin>
+                                    <Insets right="5.0" />
+                                </GridPane.margin>
+                                <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                </cursor>
+                            </Button>
+                        <Label fx:id="cenaPlacilo" maxWidth="1.7976931348623157E308" text="Za vnašanje plačila naprej izpolnite zavihka &quot;Vozilo&quot; in &quot;Okoliščine&quot;" textAlignment="CENTER" textFill="RED" wrapText="true" GridPane.columnSpan="2" GridPane.hgrow="ALWAYS">
+                           <padding>
+                              <Insets top="7.0" />
+                           </padding>
+                        </Label>
+                        </children>
+                        <padding>
+                            <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+                        </padding>
+                    </GridPane>
+                </content></Tab>
+            <Tab fx:id="zavihekPovzetek" disable="true" text="Povzetek">
+                <content>
+                    <GridPane>
+                        <columnConstraints>
+                            <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" percentWidth="39.0" prefWidth="109.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="333.0" minWidth="10.0" percentWidth="61.0" prefWidth="331.0" />
+                        </columnConstraints>
+                        <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        </rowConstraints>
+                        <children>
+                            <VBox prefHeight="429.0" prefWidth="238.0" spacing="8.0">
+                                <children>
+                              <Label layoutX="10.0" layoutY="10.0" text="Okoliščine">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                                    <Label layoutX="10.0" layoutY="10.0" text="Čas izposoje:">
+                                        <font>
+                                            <Font size="14.0" />
+                                        </font>
+                                    </Label>
+                                    <Label layoutX="10.0" layoutY="42.0" text="Kraj izposoje:">
+                                        <font>
+                                            <Font size="14.0" />
+                                        </font>
+                                    </Label>
+                              <Label layoutX="10.0" layoutY="62.0" text="Čas vrnitve:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="114.0" text="Kraj vrnitve:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="140.0" text="Avtomobil">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="193.0" text="Avtomobil:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="166.0" text="Menjalnik:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="192.0" text="Gorivo:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="218.0" text="Dodatno zavarovanje:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="193.0" text="Stranka">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="221.0" text="Ime in priimek:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="247.0" text="Naslov:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="379.0" text="Pošta in kraj:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="405.0" text="E-mail:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="431.0" text="Starost:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="457.0" text="Čas imetja izpita:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="325.0" text="Plačilo">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="353.0" text="Način:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="537.0" text="Številka kartice:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                                </children>
+                            </VBox>
+                        <VBox prefHeight="429.0" prefWidth="238.0" spacing="8.0" GridPane.columnIndex="1">
+                           <children>
+                              <Label layoutX="10.0" layoutY="10.0" text="Okoliščine" visible="false">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="povDatumIzposoje" layoutX="10.0" layoutY="10.0" text="Datum izposoje:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="povKrajIzposoje" layoutX="10.0" layoutY="42.0" text="Kraj izposoje:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="povDatumVrnitve" layoutX="10.0" layoutY="62.0" text="Čas vrnitve:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="povKrajVrnitve" layoutX="10.0" layoutY="114.0" text="Kraj vrnitve:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="140.0" text="Avtomobil" visible="false">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="povAvtomobil" layoutX="10.0" layoutY="193.0" text="Avtomobil:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="povMenjalnik" layoutX="10.0" layoutY="166.0" text="Menjalnik:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="povGorivo" layoutX="10.0" layoutY="192.0" text="Gorivo:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="povZavarovanje" layoutX="10.0" layoutY="218.0" text="Dodatno zavarovanje:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="193.0" text="Stranka" visible="false">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="povIme" layoutX="10.0" layoutY="221.0" text="Ime in priimek:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="povNaslov" layoutX="10.0" layoutY="247.0" text="Naslov:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="povPostaKraj" layoutX="10.0" layoutY="379.0" text="Pošta in kraj:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="povEmail" layoutX="10.0" layoutY="405.0" text="E-mail:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="povStarost" layoutX="10.0" layoutY="431.0" text="Starost:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="povCasIzpita" layoutX="10.0" layoutY="457.0" text="Čas imetja izpita:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="325.0" text="Plačilo" visible="false">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="povNacinPlacila" layoutX="10.0" layoutY="353.0" text="Način:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="povStevilkaKartice" layoutX="10.0" layoutY="537.0" text="test">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
+                           <children>
+                              <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#odpriZavihekPlacilo" text="Nazaj" textFill="#2b32eb" HBox.hgrow="ALWAYS">
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#ponastavi" text="Ponastavi vhodne vrednosti" textFill="#2b32eb" HBox.hgrow="ALWAYS">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                           </children>
+                        </HBox>
+                        </children>
+                        <padding>
+                            <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+                        </padding>
+                    </GridPane>
+                </content></Tab>
+        </tabs>
+      </TabPane>
+   </center>
+</BorderPane>
